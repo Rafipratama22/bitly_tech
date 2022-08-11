@@ -1,0 +1,187 @@
+to run app use command
+go run main.go
+
+
+Note api:
+
+Register => 
+    Method: "POST",
+    Url:"api/bitly/register",
+    Body:{
+	"username": "rafi pratama",
+	"email": "rafipratama877@gmail.com",
+	"password": "rafi"
+    }
+    Response:{
+	"ID": 4,
+	"Username": "rafi pratama",
+	"Email": "rafipratama877@gmail.com",
+	"Password": "$2a$10$vG/9c26k2Tw3Kiewp0IKhOf3XGuPOfKeunxmRjVU78Aroch0hah6K",
+	"CreatedAt": "2022-08-11T00:53:14.8868935+07:00",
+	"UpdatedAt": "2022-08-11T00:53:14.8868935+07:00",
+	"Products": null
+    }
+
+Login => 
+    Method: "POST",
+    Url: "api/bitly/login"
+    Body: {
+	"find": "rafipratama877@gmail.com",
+	"password": "rafi"
+    }
+    Response: {
+	"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjAyOTUxMzgsInVzZXJfaWQiOjR9.G8PMHpFUOUo8dUv5AvnGCUQcTxBUhwMEUAn1MUAhAC8"
+    }
+
+All Products => 
+    Method: "GET",
+    Url: "api/bitly/products",
+    Headers: {
+        authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjAyODUzNDEsInVzZXJfaWQiOjR9.AEHmnoamwCio3OsX_t5yNciZkiP2y1wRDl6uvPdPpq8"
+    },
+    Response: [
+	{
+		"ID": 1,
+		"DestinationUrl": "https://github.com/Rafipratama22/Go-Market/blob/main/entity/product.go",
+		"ModifyUrl": "XVlBzg",
+		"Title": "",
+		"Click": 0,
+		"UserID": 4,
+		"Source": "test1",
+		"Medium": "test2",
+		"Campaign": "",
+		"CreatedAt": "2022-08-10T02:32:26Z",
+		"UpdatedAt": "2022-08-10T02:44:34Z"
+	},
+	{
+		"ID": 3,
+		"DestinationUrl": "https://blog.logrocket.com/gin-binding-in-go-a-tutorial-with-examples/",
+		"ModifyUrl": "baiCMR",
+		"Title": "",
+		"Click": 0,
+		"UserID": 4,
+		"Source": "",
+		"Medium": "",
+		"Campaign": "",
+		"CreatedAt": "2022-08-10T02:45:37Z",
+		"UpdatedAt": "2022-08-10T02:45:37Z"
+	}
+]
+
+Update Product =>
+    Method: "PUT",
+    Url: "api/bitly/link/:id",
+    Body: {
+    "destination_url": "https://github.com/Rafipratama22/Go-Market/blob/main/entity/product.go",
+	"modify_url": "XVlBzg",
+	"source": "test1",
+	"medium": "test2",
+	"campaign": ""
+    },
+    Headers: {
+        authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjAxODI3NDcsInVzZXJfaWQiOjN9.zzwP6nsusoXG_PBLc9iTxyQv8NY0u4lQaZVc6Q3CCAQ,
+        Content-Type: "application/json"
+    },
+    Response: {
+	"ID": 1,
+	"DestinationUrl": "https://github.com/Rafipratama22/Go-Market/blob/main/entity/product.go",
+	"ModifyUrl": "XVlBzg",
+	"Title": "",
+	"Click": 0,
+	"UserID": 3,
+	"Source": "test1",
+	"Medium": "test2",
+	"Campaign": "",
+	"CreatedAt": "2022-08-10T02:32:26Z",
+	"UpdatedAt": "2022-08-10T09:44:33.882+07:00"
+    }
+
+Create Product => 
+	Method: "POST",
+	Url: "api/bitly/link",
+	Body: {
+		"destination_url": "https://blog.logrocket.com/gin-binding-in-go-a-tutorial-with-examples/",
+		"source": "",
+		"medium": "",
+		"campaign": ""
+	},
+	Headers: {
+		authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjAxODI3NDcsInVzZXJfaWQiOjN9.zzwP6nsusoXG_PBLc9iTxyQv8NY0u4lQaZVc6Q3CCAQ,
+        Content-Type: "application/json"
+	},
+	Response: {
+		"ID": 3,
+		"DestinationUrl": "https://blog.logrocket.com/gin-binding-in-go-a-tutorial-with-examples/",
+		"ModifyUrl": "baiCMR",
+		"Title": "",
+		"Click": 0,
+		"UserID": 3,
+		"Source": "",
+		"Medium": "",
+		"Campaign": "",
+		"CreatedAt": "2022-08-10T09:45:37.2592156+07:00",
+		"UpdatedAt": "2022-08-10T09:45:37.2592156+07:00"
+	}
+
+Create Product Without Login =>
+	Method: "POST",
+	Url: "api/bitly/create",
+	Body: {
+		"destination_url": "https://www.google.com/search?q=useState%20react&oq=useState%20react"
+	},
+	Response: {
+		"code": "XoEFfRsWxPLDnJObCsNV"
+	}
+
+Patch Product Click => 
+	Method: "PATCH",
+	Url: "api/bitly/click/:id",
+	Response: {
+		"ID": 1,
+		"DestinationUrl": "https://github.com/Rafipratama22/Go-Market/blob/main/entity/product.go",
+		"ModifyUrl": "XVlBzg",
+		"Title": "",
+		"Click": 2,
+		"UserID": 4,
+		"Source": "test1",
+		"Medium": "test2",
+		"Campaign": "",
+		"CreatedAt": "2022-08-10T02:32:26Z",
+		"UpdatedAt": "2022-08-11T15:59:57.49+07:00"
+	}
+
+Get One Product => 
+	Method: "GET",
+	Url: "api/bitly/link/:id",
+	Headers: {
+		authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjAxODI3NDcsInVzZXJfaWQiOjN9.zzwP6nsusoXG_PBLc9iTxyQv8NY0u4lQaZVc6Q3CCAQ
+	},
+	Response: {
+		"ID": 1,
+		"DestinationUrl": "https://github.com/Rafipratama22/Go-Market/blob/main/entity/product.go",
+		"ModifyUrl": "XVlBzg",
+		"Title": "",
+		"Click": 2,
+		"UserID": 4,
+		"Source": "test1",
+		"Medium": "test2",
+		"Campaign": "",
+		"CreatedAt": "2022-08-10T02:32:26Z",
+		"UpdatedAt": "2022-08-11T08:59:57Z"
+	}
+
+Get Info User => 
+	Method: "GET",
+	Url: "api/bitly/user",
+	Headers: {
+		authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjAxODI3NDcsInVzZXJfaWQiOjN9.zzwP6nsusoXG_PBLc9iTxyQv8NY0u4lQaZVc6Q3CCAQ
+	},
+	Response: {
+	"ID": 4,
+	"Username": "rafi pratama",
+	"Email": "rafipratama877@gmail.com",
+	"Password": "$2a$10$vG/9c26k2Tw3Kiewp0IKhOf3XGuPOfKeunxmRjVU78Aroch0hah6K",
+	"CreatedAt": "2022-08-10T17:53:15Z",
+	"UpdatedAt": "2022-08-10T17:53:15Z",
+	"Products": null
+	}
